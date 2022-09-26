@@ -1,0 +1,16 @@
+Before running for the first time, please run the following command
+
+# These scripts were written with Python 3.9.
+
+# Environment Setup Instructions
+# ANACONDA / SPYDER USERS
+1. Install Anaconda: https://www.anaconda.com/
+2. Upgrade Conda Python Version: conda install -c anaconda python=3.9
+3. Launch Spyder - Open Anaconda Navigator, Find Spyder in the list of applications and click Launch
+
+# Retrieve your API Token
+1. Navigate to https://support.lumina247.com
+2. Sign in or Signup by clicking the Profile menu
+3. Copy your access token from the support site and paste it into the API_TOKEN variable at the top of the example script
+4. Install nltk library (pip install nltk)
+5. Run the example script.
