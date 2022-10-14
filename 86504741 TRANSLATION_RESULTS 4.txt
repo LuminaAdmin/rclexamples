@@ -1,0 +1,71 @@
+Iteration:   (4/5)
+Sample size: 100
+Accuracy:    0.38
+GLEU:        0.57
+Time:        31.55s
+
+===
+
+Source	Target	Translation	Accuracy	GLEU
+This metal is called zinc.	Dette metal kaldes zink.	Hvor mange æg er der?	False	0.0
+Tom was released from prison on October twentieth.	Tom blev løsladt fra fængslet tyvende oktober.	Tom blev løsladt fra fængslet den 20.	False	0.6363636363636364
+He is good for nothing.	Han duer ikke.	en god grund til at sige	False	0.0
+Can't we just flip a coin?	Kan vi ikke bare slå plat eller krone?	Kan vi ikke bare slå plat	False	0.6923076923076923
+Tom blushed like a schoolgirl.	Tom rødmede som en skolepige.	ville overraske mig hvis det tænke mig	False	0.0
+It looks like rain today.	Det ser ud til regn i dag.	Jeg håber ikke at det regner	False	0.0
+I'm busy with my homework.	Jeg er ved at lave mine hjemmeopgaver.	er en form for energi.	False	0.045454545454545456
+Come on, let's get breakfast.	Kom nu, lad os få morgenmad.	Lad os komme til sagen.	False	0.05555555555555555
+Let's go get a Christmas tree.	Lad os få fat i et juletræ.	Lad os få fat i et MISSING END? "Lad os få en snak"	False	0.391304347826087
+I have a week to do my homework.	Jeg har en uge til at lave mine lektier.	Jeg har en uge til at lave mine	False	0.8666666666666667
+It's Tom's 30th birthday tomorrow.	Det er Toms trediveårsfødselsdag i morgen.	at bede ham om hjælp.	False	0.0
+I was just about to say the same thing.	Jeg skulle lige til at sige det samme.	Jeg skulle lige til at sige det det samme.	False	0.8
+We can't trust what she says.	Vi kan ikke stole på hvad hun siger.	Vi kan ikke stole på hvad	False	0.6923076923076923
+Now it's time to say good night.	Nu er det tid til at sige godnat.	Nu er det tid til at sige MISSING END? "Selvfølgelig kan hun tale engelsk."	False	0.44
+He didn't like being poor.	Han kunne ikke lide at være fattig.		False	0.0
+The company was founded in 1974.	Virksomheden blev grundlagt i 1974.	Tom vil gerne være simultantolk.	False	0.0
+The importance of music is underrated.	Musikkens betydning undervurderes.	Thai er Thailands officielle sprog.	False	0.0
+I've been called worse things by better people.	Jeg er blevet kaldt værre ting af bedre mennesker.	Jeg er blevet kaldt værre ting af bedre	False	0.8666666666666667
+There are several ways we could attack this problem.	Der er flere måder, vi kan angribe dette problem på.	Der er flere måder, vi kan angribe dette problem	False	0.8823529411764706
+I'm pretty sure Tom's plan isn't going to work.	Jeg er ret sikker på at Toms plan ikke kommer til at virke.	Jeg er ret sikker på at Toms plan ikke	False	0.6521739130434783
+I'm drinking a beer right now.	Jeg sidder lige nu og drikker en øl.	Jeg sidder lige nu og drikker	False	0.6923076923076923
+I just got kicked out of school.	Jeg er lige blevet smidt ud af skolen.	Jeg er lige blevet smidt ud af	False	0.8461538461538461
+I don't think that's a real word.	Jeg tror ikke, at det er et rigtigt ord.	Jeg tror ikke, at det er et MISSING END? "Jeg forstår slet ikke fransk."	False	0.44
+I bought a new phone.	Jeg købte en ny telefon.	at Tom har købt en ny MISSING END? "har købt en ny bil?"	False	0.06521739130434782
+My favorite subject is biology.	Mit yndlingsfag er biologi.	Hans yndlingsbaseballhold er Giants, men han MISSING END? "er Giants, men han kan"	False	0.021739130434782608
+Are you hiding something from me?	Skjuler du noget for mig?	Er der noget du ikke fortæller	False	0.1111111111111111
+I'd like to borrow about three hundred thousand dollars.	Jeg vil gerne låne omkring tre hundrede tusinde dollar.	Jeg vil gerne låne cirka tre hundrede dollars.	False	0.43333333333333335
+He went abroad to study English.	Han tog til udlandet for at lære engelsk.	Han tog til udlandet for at	False	0.6923076923076923
+Tom is in a bad mood.	Tom er i dårligt humør.	Han er i dårligt humør.	False	0.7142857142857143
+You can't know that for sure.	Du kan ikke vide det med sikkerhed.	Du kan ikke vide det med	False	0.8181818181818182
+She has flowers in her hand.	Hun har blomster i sin hånd.	Mary har blomster i sit hår.	False	0.3333333333333333
+Tom got on the train.	Tom kom på toget.	Tom må have mistet forstanden.	False	0.07142857142857142
+Tom took the watch apart.	Tom skilte uret ad.	Tom tog Mary til hospitalet.	False	0.07142857142857142
+They were sunbathing on the beach.	De solbadede på stranden.	De tog solbad på stranden.	False	0.2857142857142857
+I'll take the cheaper one.	Jeg tager den billigste af de to.	Det er et interessant spørgsmål.	False	0.0
+I'll just have one or two beers.	Jeg skal kun have en eller to øl.	Jeg skal kun have en eller to MISSING END? "Jeg vil betale med rejsecheck."	False	0.44
+French is my mother tongue.	Fransk er mit modersmål.	har hans navn på tungen.	False	0.0
+A new branch will be opened in Chicago next month.	En ny filial åbner næste måned i Chicago.	En ny filial åbner i Chicago i næste måned.	False	0.4
+He does not believe in evolution.	Han tror ikke på udviklingslæren.	Han tror ikke på evolutionen.	False	0.7142857142857143
+My native language is French.	Mit modersmål er fransk.	lave fejl når du lærer som	False	0.0
+She is poor, but she looks happy.	Hun er fattig, men hun ser glad ud.	Hun er fattig, men hun er lykkelig.	False	0.5384615384615384
+Do you have a website?	Har du en website?	tjener penge ved at sælge en MISSING END? "du nogensinde pløjet en mark"	False	0.021739130434782608
+I don't have a son named Tom.	Jeg har ikke en søn der hedder Tom.	Jeg har ikke en søn der hedder	False	0.8461538461538461
+Tom has a girl back home.	Tom har en pige derhjemme.	sandsynligvis faldet i søvn bag en et stykke stykke som et barn.	False	0.023809523809523808
+The light has turned green.	Lyset er blevet grønt.	ud efter kontakten og slukkede lyset.	False	0.0
+Tom has started writing a novel.	Tom er begyndt på at skrive en roman.	Tom er begyndt på at skrive	False	0.6923076923076923
+Tom is reading the Bible.	Tom sidder og læser Bibelen.	Tom er ikke et kattemenneske.	False	0.07142857142857142
+My dog wants to play.	Min hund vil lege.	Jeg har trænet min hund til MISSING END? "trænet min hund til at"	False	0.021739130434782608
+Could you please turn your television down?	Vil du være så venlig at skrue ned fjernsynet?	Kan du venligst skrue ned for fjernsynet?	False	0.16666666666666666
+I have a slight headache.	Jeg har en let hovedpine.	Det ser ud til at jeg MISSING END? "ud til at jeg har"	False	0.0
+Tom called me a scaredy-cat.	Tom kaldte mig en bangebuks.	Kunne du hente et glas vand MISSING END? "hente et glas vand til"	False	0.0
+I've never met Tom's parents.	Jeg har aldrig mødt Toms forældre.	Jeg skulle aldrig have kysset Toms	False	0.16666666666666666
+Tom's wallet is almost empty.	Toms pengepung er næsten tom.	er næsten fem miles lang.	False	0.21428571428571427
+Tom knew I was busy.	Tom vidste at jeg havde travlt.	Jeg vil have dig.	False	0.0
+Tom doesn't need glasses anymore.	Tom har ikke længere brug for briller.	behøver ikke længere at gå med	False	0.13636363636363635
+That looks delicious. I'd like to try it.	Det ser lækkert ud. Det vil jeg gerne prøve.	gerne have den gave pakket tænke mig	False	0.03333333333333333
+Who are all these people?	Hvem er alle de her mennesker?	Hun er gift med en æbler	False	0.05555555555555555
+Red is out of fashion.	Rødt er ikke mere på mode.	Miniskørter er gået af mode.	False	0.1111111111111111
+How much do you make?	Hvor meget tjener du?	Hvor mange vil I blive?	False	0.07142857142857142
+I just found out Tom is dead.	Jeg har lige fundet ud af at Tom er død.	Jeg har lige fundet ud af at	False	0.6470588235294118
+I want an answer from you as soon as possible.	Jeg vil gerne have et svar fra dig så hurtigt som muligt.	Jeg vil gerne have et svar fra dig så hurtigt	False	0.8095238095238095
+You look like Harry Potter.	Du ligner Harry Potter.	Har du vanter?	False	0.0

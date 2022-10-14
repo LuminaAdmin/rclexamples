@@ -6,15 +6,18 @@ import random
 import json
 import time
 from enum import Enum
-from nltk.util import everygrams, ngrams
+from nltk.util import everygrams
 from requests import Response
 
 # Please set API_TOKEN to what is displayed from https://support.lumina247.com, please make sure the token is in the format "***REMOVED***<token>"
 # "PASTE TOKEN HERE"
-API_TOKEN = "***REMOVED***PASTE "
+API_TOKEN = "PASTE TOKEN HERE"
 
-# You may change this line to point to a custom dataset for training
+# CHANGE THIS LINE TO POINT TO YOUR TEST DATA FILE
 DATA_SET = "rcl_dataset_translate/dan.txt"
+
+# PASTE YOUR SESSION KEY HERE
+SESSION_KEY = 0
 
 API_URL = "https://rclapi.lumina247.io"
 
@@ -49,29 +52,6 @@ replace_map = {
 punct = {".", "?", "!"}
 
 
-def sentencize(path: Path) -> list[str]:
-    text = path.read_text(encoding="utf8")
-    for find, replacement in replace_map:
-        text = text.replace(find, replacement)
-    sentences = list()
-    add_str = ""
-    for c in text:
-        if c in punct:
-            if add_str != "":
-                add_str = add_str.strip() + c
-                if (
-                    (add_str.find(" ") > 0)
-                    and (add_str[0] >= "A")
-                    and (add_str[0] == add_str[0].upper())
-                ):
-                    sentences.append(add_str)
-                    print()
-                add_str = ""
-        else:
-            add_str = add_str + c
-    return sentences
-
-
 class InferenceDetailType(Enum):
     """Enums containing the id's for inference types"""
 
@@ -88,10 +68,6 @@ class InferencePriorityType(Enum):
     index = "Index"
     accuracy = "Accuracy"
     specific = "Specific"
-
-
-def predict_line_resize(line: str, vector_size=5):
-    return " ".join(line.split(" ")[:vector_size]).strip()
 
 
 def sentence_gleu(references, hypothesis, min_len=1, max_len=4):
@@ -272,171 +248,6 @@ def corpus_gleu(list_of_references, hypotheses, min_len=1, max_len=4):
     return gleu_score
 
 
-def parse_api_response(response: requests.Response) -> dict[str, Any]:
-    """extracts json from response and raises errors when needed"""
-    if response.status_code > 200:
-        raise Exception("Error calling api")
-    return {k.lower(): v for k, v in response.json().items()}
-
-
-def create_session(description: str) -> int:
-    """Creates an RCL session and returns the id"""
-    endpoint = f"{API_URL}/trainingsession"
-    r = requests.post(
-        endpoint, json={"description": str(description)}, headers=HEADERS)
-    return parse_api_response(r).get("trainingsessionkey", -1)
-
-
-def get_session_info(session_key: int) -> dict[str, Any]:
-    """Gets info about an rcl session"""
-    r = requests.get(
-        f"{API_URL}/trainingsession/{session_key}", headers=HEADERS)
-    result = parse_api_response(r)
-    try:
-        return result
-    except:
-        raise Exception(f"Session {session_key} does not exist!")
-
-
-def upload_file(session_key: int, file: Path) -> bool:
-    """Uploads a file by path"""
-
-    def _multipart_upload_start(session_key: int, file_name: str) -> str:
-        """Gets an id for a future file upload"""
-        endpoint = f"{API_URL}/trainingsession/{session_key}/document/upload/multipart/{file_name}"
-        r = requests.post(endpoint, headers=HEADERS)
-        result = parse_api_response(r)
-        return result["documentid"]
-
-    def _multipart_upload_do(
-        session_key: int,
-        document_id: str,
-        content: bytes,
-        part_number: int = 1,
-        last_part: bool = True,
-    ) -> bool:
-        """Uploads a part of a multipart file"""
-        endpoint = (
-            f"{API_URL}"
-            f"/trainingsession/{session_key}"
-            f"/document/{document_id}"
-            f"/upload/multipart/{part_number}/{last_part}"
-        )
-        r = requests.put(
-            endpoint,
-            data=content,
-            headers={
-                "Content-Type": "application/octet-stream",
-                "Authorization": API_TOKEN,
-            },
-        )
-        return r.status_code == 200
-
-    def _multipart_upload_complete(session_key: int, document_id: str) -> bool:
-        """Marks a multipart upload as complete"""
-        endpoint = (
-            f"{API_URL}"
-            f"/trainingsession/{session_key}"
-            f"/document/{document_id}/upload/multipart/complete"
-        )
-        r = requests.post(
-            endpoint,
-            headers=HEADERS,
-            json={},
-        )
-        return r.status_code == 200
-
-    file_id = _multipart_upload_start(session_key, file.name)
-    ok = _multipart_upload_do(
-        session_key,
-        file_id,
-        file.read_bytes(),
-    )
-    if ok:
-        complete = _multipart_upload_complete(
-            session_key,
-            file_id,
-        )
-        return complete
-    return False
-
-
-def training_ready_check(
-    session_key: int,
-    priority: InferencePriorityType = InferencePriorityType.accuracy,
-    detail: InferenceDetailType = InferenceDetailType.predict_next,
-) -> Response:
-    """Makes an inference with the model"""
-
-    print("Checking if model is ready for inference.")
-
-    endpoint = (
-        f"{API_URL}"
-        f"/trainingsession/{session_key}"
-        f"/inference/{priority.value}"
-        f"/{detail.value}"
-    )
-    test_data = "health check"
-    r = requests.post(endpoint, data=json.dumps(test_data), headers=HEADERS)
-    return r
-
-
-def train_model(
-    session_key: int,
-    vector_size: int,
-    translation_model: bool = False,
-    sensor_model: bool = False,
-    train_goal: float = 0.7,
-    block_for_ready: bool = True,
-) -> bool:
-    """Trains the RCL Model with the provided settings"""
-    r = requests.post(
-        f"{API_URL}/trainingsession/{session_key}/start",
-        json={
-            "vectorSize": vector_size,
-            "trainTranslationServices": translation_model,
-            "trainSensorServices": sensor_model,
-            "trainGoal": train_goal,
-        },
-        headers=HEADERS,
-    )
-
-    if r.status_code != 200:
-        raise Exception("Training Error!")
-
-    if block_for_ready:
-        info = get_session_info(session_key)
-        health_check_count = 0
-        # minimum successful healthy inferences before "ready"
-        health_check_threshold = 5
-
-        while (
-            info["trainingsession"]["statuses"][-1]["statusTypeName"].lower()
-            != "trainingcompleted"
-        ):
-            time.sleep(5)
-            info = get_session_info(session_key)
-
-        health_status = training_ready_check(
-            session_key, InferencePriorityType.index, InferenceDetailType.translate_line
-        )
-        while health_check_count < health_check_threshold:
-            health_status = training_ready_check(
-                session_key,
-                InferencePriorityType.index,
-                InferenceDetailType.translate_line,
-            )
-            if health_status.status_code == 200:
-                response_body = health_status.json()
-                if "unrecognized model" not in response_body:
-                    health_check_count += 1
-
-            if health_status != 200:
-                time.sleep(5)
-
-        print("Model is ready for inference.")
-
-
 def inference(
     session_key: int,
     input_text: str,
@@ -526,49 +337,7 @@ def evaluate_translation_model(
         results_file.write_text("\n".join(lines))
 
 
-def clean_folder(path: Path) -> Path:
-    """Cleans a folder of text data, returns path to cleaned folder"""
-    if path.is_file():
-        raise Exception("Must be used on a folder path, not file")
-
-    out_folder = Path(str(path.absolute()) + "_clean")
-    out_folder.mkdir(exist_ok=True)
-    for f in path.iterdir():
-        text = "\n".join(sentencize(f))
-        Path(out_folder.joinpath(f.name)).write_text(text)
-    return out_folder
-
-
-def translation_example():
-    """End to end example for translation and gleu scoring"""
-
-    # UPDATE YOUR DESCRIPTION HERE
-    session_key = create_session("my test translation session5")
-    print(f"Created session: {session_key}")
-
-    print("uploading files")
-    dataset = Path(DATA_SET)
-    upload_file(session_key, dataset)
-
-    print("training")
-    train_model(session_key, 5, translation_model=True)
-
-    print("Training done!")
-    print("Testing inference: translate")
-    sample = "Ill be back."
-    print("Example input:" + sample)
-    result = inference(
-        session_key,
-        sample,
-        InferencePriorityType.index,
-        InferenceDetailType.translate_line,
-    )
-    print("Example output: " + result)
-
-    print("Evaluating GLEU Scores")
-
-    evaluate_translation_model(session_key, dataset)
-
-
 if __name__ == "__main__":
-    translation_example()
+    print('Evaluating Gleu Scores')
+    dataset = Path(DATA_SET)
+    evaluate_translation_model(SESSION_KEY, dataset)

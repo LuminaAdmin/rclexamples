@@ -1,0 +1,75 @@
+Iteration:   (2/5)
+Sample size: 100
+Accuracy:    0.34
+GLEU:        0.56
+Time:        34.25s
+
+===
+
+Source	Target	Translation	Accuracy	GLEU
+That boy showed no fear.	Den dreng viste ingen frygt.	Jeg får den fornemmelse at ingen MISSING END? "den fornemmelse at ingen her"	False	0.021739130434782608
+He whistled for his dog.	Han fløjtede efter sin hund.	Tom købte noget legetøj til sine MISSING END? "noget legetøj til sine børn."	False	0.0
+Tom disappeared without leaving a trace.	Tom forsvandt uden at efterlade sig et spor.	Tom forsvandt uden at efterlade sig	False	0.6923076923076923
+I think she is sick.	Jeg tror hun er syg.	tror, Tom kan hjælpe dig.	False	0.0
+Does Tom ever wear a tie?	Går Tom nogensinde med slips?	Går Tom nogensinde med hat?	False	0.7142857142857143
+Tom put his career on the back burner and became a house husband, to enable Mary to pursue her career.	Tom satte sin egen karriere i anden række og blev hjemmegående for at gøre det muligt for Mary at gå videre med sin karriere.	Tom satte sin karriere på vågeblus og blev hjemmegående for at gøre det muligt for Mary at fortsætte sin karriere.	False	0.5333333333333333
+Tom talks like a girl.	Tom taler som en pige.	Mary er en enerådig pige.	False	0.14285714285714285
+Would you like a cookie?	Vil du have en småkage?	mere vil du gerne se?	False	0.07142857142857142
+I believe you can help us.	Jeg tror I kan hjælpe os.	Jeg tror du kan hjælpe os.	False	0.5
+I hope you're not alone.	Jeg håber at I ikke er alene.		False	0.0
+How did you become interested in studying languages?	Hvornår begyndte du at interessere dig for at lære sprog?	Hvornår begyndte du at interessere dig for at	False	0.7647058823529411
+It will be dark soon.	Det er snart mørkt.	ikke forventet at være her så	False	0.0
+Tom was wearing jeans and a T-shirt.	Tom havde jeans og T-shirt på.	Tom havde cowboybukser og T-shirt på.	False	0.5
+Tom is a heroin addict.	Tom er afhængig af heroin.	Tom er min ven.	False	0.21428571428571427
+I'm playing with my cat.	Jeg leger med min kat.	Jeg sammenlignede min bil med hans.	False	0.16666666666666666
+I hate being a preacher's son.	Jeg hader at være søn af en prædikant.	Jeg hader at være søn af	False	0.6923076923076923
+Tom can't stand people like that.	Tom kan ikke fordrage den slags mennesker.	Tom kan ikke fordrage den slags	False	0.8181818181818182
+Don't feed the pigeons, please.	Lad venligst være med at fodre duerne.		False	0.0
+It's raining cats and dogs.	Det regner meget kraftigt.	kan lide katte, andre foretrækker hunde.	False	0.0
+We couldn't go out because of the rain.	Vi var nødt til at blive inde på grund af regnen.	Vi var nødt til at blive inde på	False	0.6842105263157895
+The grapefruit tastes very sour.	Grapen smager meget surt.	De vasker hænderne.	False	0.0
+A thick mist covered the countryside.	En tyk tåge lå over landskabet.	En tyk tåge dækkede landskabet.	False	0.3888888888888889
+That's not important, is it?	Det er ikke vigtigt, er det?	Hvis bil er den her?	False	0.05555555555555555
+Tom doesn't like his new glasses.	Tom kan ikke lide sine nye briller.	Tom kan ikke lide sine nye	False	0.8181818181818182
+I bought a new computer last month.	Jeg købte en ny computer i forrige måned.	Jeg købte en ny computer i forrige	False	0.8461538461538461
+Did anyone else get hurt?	Er der andre der er blevet skadet?	Fulgte nogen efter dig?	False	0.0
+Were you at home yesterday?	Var du hjemme i går?	Hvorfor stirrer alle på os?	False	0.0
+I can hear Tom snoring in the next room.	Jeg kan høre Tom snorke i værelset ved siden af.	Jeg kan høre Tom snorke i værelset ved siden	False	0.8823529411764706
+I'm not an only child.	Jeg er ikke enebarn.	Tom bor kun en time væk.	False	0.0
+The world is a madhouse.	Verden er et galehus.	sætte os ned og snakke til MISSING END? "os gøre verden til et"	False	0.0
+Could you reduce the price a little?	Kan du slå lidt af på prisen?	Kan du reducere prisen en smule?	False	0.13636363636363635
+I know where you live.	Jeg ved hvor du bor.	Ved du hvad de sagde?	False	0.07142857142857142
+I have the ace of diamonds.	Jeg har ruder es.	Jeg har hjerter es.	False	0.4
+Are you sure his name was Tom?	Er du sikker på at hans navn var Tom?	Er du sikker på at hans navn	False	0.7333333333333333
+Thank you very much for all you have done.	Mange tak for alt hvad I har gjort.	Mange tak for alt.	False	0.23076923076923078
+This is a difficult situation.	Nu er gode råd dyre.	Beslutningen er endnu ikke endelig.	False	0.07142857142857142
+Why haven't we done anything?	Hvorfor gjorde vi ikke noget?	du sikker på at du ikke MISSING END? "Man ligger som man har"	False	0.021739130434782608
+Tom is a former athlete.	Tom er eksatlet.	Tom er min ven.	False	0.3
+Your mother must have been beautiful when she was young.	Din mor må have været smuk som ung.	Din mor må have været smuk, da hun da hun hun var	False	0.3333333333333333
+What does the average Joe think?	Hvad synes gennemsnitsdanskeren?	Hvad synes hr.	False	0.5
+We got into his car and went to the sea.	Vi satte os ind i hans bil og tog til havet.	Vi satte os ind i hans bil og tog til	False	0.8947368421052632
+Do you have a house?	Har du et hus?	tjener penge ved at sælge en MISSING END? "du nogensinde pløjet en mark"	False	0.0
+If we'd worked harder, we would've succeeded.	Hvis vi havde arbejdet hårdere, ville det være lykkedes for os.	Hvis vi havde arbejdet hårdere, ville det	False	0.5789473684210527
+Tom keeps his car clean.	Tom holder sin bil ren.	den ældste person i rummet.	False	0.0
+I don't believe in that.	Det tror jeg ikke på.	Jeg faldt ikke i søvn.	False	0.07142857142857142
+Are you talking to me?	Er det mig du taler til?	Hvorfor taler du til mig?	False	0.1111111111111111
+Get here as soon as you can.	Kom så hurtigt du kan!	Boston så snart han fik telefonopkaldet.	False	0.05555555555555555
+I've done that many times.	Det har jeg gjort mange gange.	næsten kan læse hinandens tanker.	False	0.0
+I told you not to come here.	Jeg bad dig om ikke at komme her.	Jeg bad dig om ikke at komme	False	0.8461538461538461
+I didn't think that would happen.	Jeg troede ikke at det ville ske.	Jeg troede ikke at det ville	False	0.8181818181818182
+Thank you in advance for your help.	Jeg takker dig på forhånd for din hjælp.	Jeg takker dig på forhånd for din	False	0.8461538461538461
+These colors harmonize very well.	Disse farver harmonerer meget godt.	Alle disse æbler er meget søde.	False	0.05555555555555555
+He is playing over there.	Han leger derovre.	ikke med den fyr derovre.	False	0.07142857142857142
+You can lead a horse to water, but you can't make it drink.	Man kan tvinge hesten til truget, men man kan ikke tvinge den til at drikke.	Man kan tvinge hesten til truget, men man kan ikke tvinge den til	False	0.8518518518518519
+She has very good manners.	Hun har meget gode manerer.	Jeg prøver på at tabe god til	False	0.0
+How many times has Tom been divorced?	Hvor mange gange er Tom blevet skilt?	Hvor mange gange har Tom været gift?	False	0.3181818181818182
+Would you be willing to help?	Ville du være villig til at hjælpe?	Ville du være villig til at	False	0.8181818181818182
+I heard that Tom wasn't a good teacher.	Jeg hørte at Tom ikke var en god lærer.	Jeg hørte at Tom ikke var en god	False	0.8666666666666667
+I'm just doing my job.	Jeg gør kun mit arbejde.	Jeg har brug for fransk i	False	0.05555555555555555
+All is well that ends well.	Når enden er god, er alting godt.	Når enden er god, er alting	False	0.8181818181818182
+I knew Tom was shy.	Jeg vidste at Tom var genert.	Tom afviste vores tilbud.	False	0.05555555555555555
+Don't stay away too long.	Bliv ikke for længe væk.	Jeg har aldrig forstået dig.	False	0.0
+You keep out of this.	Bland dig udenom!	Jeg er led og ked af MISSING END? "Jeg er sikker på at"	False	0.0
+Tom is learning to write programs in JavaScript.	Tom er ved at lære at skrive programmer i JavaScript.	Tom er ved at lære at skrive programmer	False	0.7647058823529411
+When I entered the room, I could hear Mozart playing on the radio.	Da jeg trådte ind i værelset, kunne jeg høre Mozart blive spillet på radioen.	Da jeg trådte ind i værelset, kunne jeg høre Mozart blive spillet på	False	0.92
+Why did they fire Tom?	Hvorfor fyrede de Tom?	Toms hund nogensinde bidt Mary?	False	0.0

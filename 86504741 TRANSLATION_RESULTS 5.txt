@@ -1,0 +1,73 @@
+Iteration:   (5/5)
+Sample size: 100
+Accuracy:    0.36
+GLEU:        0.61
+Time:        34.79s
+
+===
+
+Source	Target	Translation	Accuracy	GLEU
+He opened the door, though I told him not to.	Han åbnede døren, selvom jeg bad ham om at lade være.	Han åbnede døren, selvom jeg bad ham om at lade	False	0.8947368421052632
+The automobile industry is one of the main industries in Japan.	Autoindustrien er en af de vigtigste industrier i Japan.	Bilindustrien er en af de vigtigste industrier de største byer i verden.	False	0.4523809523809524
+Tom is addicted to cocaine.	Tom er afhængig af kokain.	som Tom går på, søger en MISSING END? "går på, søger en ny"	False	0.021739130434782608
+Tom failed to pass his driving test.	Tom bestod ikke køreprøven.	Tom dumpede til køreprøven.	False	0.2
+I think they went this way.	Jeg tror ​​de gik denne vej.	Jeg tror ??de er gået denne	False	0.2222222222222222
+I like snow a lot.	Jeg holder meget af sne.	at lave mad; derfor spiser jeg	False	0.0
+Half of what Tom says isn't true.	Halvdelen af det Tom siger, er ikke sandt.	Halvdelen af det Tom siger, er ikke	False	0.8461538461538461
+It's unlikely that replacing the battery will fix the problem.	Det er usandsynligt at en udskiftning af batteriet vil løse problemet.	Det er usandsynligt at en udskiftning af batteriet vil løse	False	0.8947368421052632
+Tom likes chickpeas and rice.	Tom kan godt lide kikærter og ris.		False	0.0
+He likes to read books.	Han kan lide at læse bøger.	en af mine gamle venner.	False	0.0
+This medicine will decrease your pain.	Denne medicin vil lindre dine smerter.	Denne medicin vil lindre smerterne.	False	0.5555555555555556
+Tom kept asking me questions.	Tom blev ved med at stille mig spørgsmål.		False	0.0
+It's easy to answer your question.	Det er let at besvare dit spørgsmål.	Det er let at besvare dit	False	0.8181818181818182
+I think Tom is going to win.	Jeg tror ​​at Tom vil vinde.	Jeg tror ??at Tom vil vinde.	False	0.5
+The clutch isn't working right.	Koblingen fungerer ikke rigtigt.	Vi ved begge at dette ikke	False	0.05555555555555555
+Tom wants us to mount the TV on the wall.	Tom vil have os til at montere fjernsynet på væggen.	Tom vil have os til at montere tv'et på væggen.	False	0.7352941176470589
+Tom looks young for his age.	Tom ser ung ud af sin alder.	Tom ser ung ud af sin MISSING END? "Tom elsker mig, og jeg"	False	0.391304347826087
+I'll see you at the library tomorrow.	Jeg vil se dig i morgen på biblioteket.	Jeg vil se dig i morgen på MISSING END? "Jeg er ikke interesseret i"	False	0.44
+You have to speak French here.	Du er nødt til at tale fransk her.	Du er nødt til at tale MISSING END? "Du skal forsøge at holde"	False	0.391304347826087
+Tom put on my shirt by mistake.	Tom kom til at tage min skjorte på.	Tom kom til at tage min skjorte	False	0.8461538461538461
+Our apple tree is blooming.	Vort æbletræ blomstrer.	er det jeg kan lide modent MISSING END? "er ikke helt modent endnu."	False	0.0
+What should I do next?	Hvad bør jeg gøre nu?	mig hvad jeg skal gøre ved MISSING END? "jeg skal gøre ved det."	False	0.043478260869565216
+I want to marry you.	Jeg vil giftes med dig.	noget som jeg vil fortælle dig.	False	0.1111111111111111
+Mary misses her husband and children.	Mary savner sin mand og sine børn.	Mary savner sin mand og sine MISSING END? "Mandag morgen blev jeg bidt"	False	0.391304347826087
+He talks as if he were a teacher.	Han taler som om han var lærer.	Han taler som om han var i en drøm.	False	0.6
+Tom swam with the dolphins.	Tom svømmede med delfinerne.	Tom dræbte rotten med stokken.	False	0.14285714285714285
+Tom is unquestionably the oldest person here.	Tom er uden tvivl den ældste her.	Tom er uden tvivl den ældste person	False	0.8181818181818182
+I stayed in bed all day instead of going to work.	Jeg blev i sengen hele dagen i stedet for at gå på arbejde.	Jeg blev i sengen hele dagen i stedet for at gå	False	0.8260869565217391
+There are some books on Tom's desk.	På Toms skrivebord ligger der nogle bøger.	Der er nogle bøger på skrivebordet.	False	0.045454545454545456
+Why don't you like me?	Hvorfor kan du ikke lide mig?	være udenfor når det sner?	False	0.0
+Pour me another cup of coffee.	Hæld en kop kaffe til op til mig.	Hæld en kop kaffe til op MISSING END? "Stil skrivebordet mod væggen."	False	0.42857142857142855
+I wish you were wrong, but I know that you're right.	Jeg ville ønske at du tog fejl, men jeg ved at du har ret.	Jeg ville ønske at du tog fejl, men jeg ved	False	0.68
+Don't play with your food.	Leg ikke med maden!	aldrig skulle have ladet mig involvere MISSING END? "have ladet mig involvere i"	False	0.0
+Tom is a potential witness.	Tom er et muligt vidne.	Tom er min ven.	False	0.21428571428571427
+Tom wanted to sit next to Mary.	Tom ville sidde ved siden af Mary.	Tom ønskede at sidde ved siden af	False	0.5
+Tom wanted to go to the beach.	Tom ønskede at tage til stranden.	har altid ønsket at tage til	False	0.3333333333333333
+I wonder whether Tom likes Chinese food.	Jeg gad vide om Tom kan lide kinesisk mad.	Jeg gad vide om Tom kan lide	False	0.7333333333333333
+Tom has been in Boston for a week now.	Tom har nu været i Boston i en uge.	Tom har været i Boston i i tre uger.	False	0.43333333333333335
+There used to be a big pine tree in front of my house.	Der var tidligere et stort fyrretræ foran mit hus.	Jeg har tidligere været tjener.	False	0.03333333333333333
+The situation was really difficult to deal with.	Situationen var virkelig svær at have med at gøre.	Situationen var virkelig svær at have med at	False	0.8666666666666667
+Would you like a cookie?	Vil du have en småkage?	mere vil du gerne se?	False	0.07142857142857142
+Do you think Tom would like to go camping with us next weekend?	Tror du, at Tom kunne tænke sig at tage på camping med os næste weekend?	Tror du, at Tom kunne tænke sig at tage på camping med os	False	0.8518518518518519
+This is not my first time riding a bicycle.	Dette er ikke første gang jeg kører på cykel.	Dette er ikke første gang jeg cykler.	False	0.6
+I feel like playing cards. "So do I."	Jeg har lyst til at spille kort. "Det har jeg også."		False	0.0
+Tom doesn't mind what people say about Mary.	Tom kerer sig ikke om hvad folk siger om Mary.	Tom kerer sig ikke om hvad folk siger	False	0.7647058823529411
+I watched TV last night.	Jeg så tv i aftes.	telefon i laderen i går aftes.	False	0.1111111111111111
+I bought two pairs of trousers.	Jeg har købt to par benklæder.	Jeg har købt to par bukser.	False	0.7777777777777778
+It isn't just for show.	Det er ikke kun til pynt.	Jeg har lige gået en tur.	False	0.0
+What can you give us?	Hvad kan I give os?	hvem er Tom taget ud bogen	False	0.0
+I'm surprised that you won the prize.	Jeg er overrasket over at du vandt prisen.	Jeg er overrasket over at du vandt	False	0.8461538461538461
+Tom acts like he's exhausted.	Tom lader som om han er udmattet.		False	0.0
+The police searched Tom's locker.	Politiet gennemsøgte Toms skab.	eneste fingeraftryk politiet fandt på dørhåndtaget, MISSING END? "politiet fandt på dørhåndtaget, var"	False	0.0
+Tom promised he'd go straight home.	Tom lovede at han ville gå lige hjem.	Tom lovede at han ville gå	False	0.6923076923076923
+She bit into the apple.	Hun bed i æblet.	Tom blev grebet af panik skrællede æblet.	False	0.045454545454545456
+I have to go home and do my homework.	Jeg er nødt til at tage hjem og lave lektier.	Jeg er nødt til at tage hjem og lave	False	0.8823529411764706
+Tom put on his helmet and then got on his motorcycle.	Tom tog sin hjelm på og satte sig derefter op på sin motorcykel.	Tom tog sin hjelm på og satte sig derefter op på	False	0.8260869565217391
+Tom never talks about his exes.	Tom taler aldrig om sine eks'er.	Tom taler aldrig om sine ekser.	False	0.7777777777777778
+It isn't blood. It's tomato sauce.	Det er ikke blod. Det er tomatsauce.	Det kommer ikke på tale.	False	0.09090909090909091
+Selling cars is my job.	At sælge biler er mit arbejde.	Jeg har brug for fransk i	False	0.0
+I don't know what it is.	Jeg ved ikke hvad det er.	du ikke ved hvad det betyder, så slå det op i ordbogen.	False	0.11904761904761904
+I can scarcely sleep at night.	Jeg kan næsten ikke sove om natten.	Jeg kan næsten ikke sove om	False	0.8181818181818182
+I heard that a woman stabbed a man for eating her lunch.	Jeg har hørt at en kvinde har stukket en mand ned for at have spist hendes frokost.	Jeg har hørt at en kvinde har stukket en mand ned for	False	0.6774193548387096
+I didn't ask for your opinion.	Jeg bad ikke om din mening!	Jeg har ikke bedt om din MISSING END? "Jeg fik ikke en invitation."	False	0.10869565217391304
+I can't kiss you the way you want to be kissed.	Jeg kan ikke kysse dig på den måde du ønsker at blive kysset.	Jeg kan ikke kysse dig på den som du er.	False	0.5
