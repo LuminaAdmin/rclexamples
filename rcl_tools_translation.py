@@ -11,7 +11,7 @@ from requests import Response
 
 # Please set API_TOKEN to what is displayed from https://support.lumina247.com, please make sure the token is in the format "***REMOVED***<token>"
 # "PASTE TOKEN HERE"
-API_TOKEN = "***REMOVED***PASTE "
+API_TOKEN = "PASTE TOKEN HERE"
 
 # You may change this line to point to a custom dataset for training
 DATA_SET = "rcl_dataset_translate/dan.txt"
