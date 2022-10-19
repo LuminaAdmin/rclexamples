@@ -49,3 +49,7 @@ def clean_tatoeba(path: str) -> str:
     text = "\n".join([clean_line(l) for l in lines])
     new_file.write_text(text, encoding="utf8")
     return str(new_file.absolute())
+
+if __name__ == "__main__":
+    new_file = clean_tatoeba("rcl_dataset_tatoeba/Sentence pairs in English-Yoruba - 2022-10-19.tsv")
+    print(f"Cleaned file saved to: {new_file}")
