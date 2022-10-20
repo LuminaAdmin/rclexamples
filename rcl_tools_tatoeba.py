@@ -1,6 +1,7 @@
 from pathlib import Path
 
 replace_map = [
+    ("\ufeff", ""),
     ("\r", ""),
     ("\n", " "),
     ("(", ""),
@@ -45,7 +46,7 @@ def clean_tatoeba(path: str) -> str:
 
     file = Path(path)
     new_file = file.parent / f"{file.stem}_cleaned{file.suffix}"
-    lines = file.read_text(encoding="utf-8-sig").strip().split("\n")
+    lines = file.read_text(encoding="utf8").strip().split("\n")
     text = "\n".join([clean_line(l) for l in lines])
     new_file.write_text(text, encoding="utf8")
     return str(new_file.absolute())

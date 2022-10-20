@@ -515,7 +515,7 @@ def evaluate_predict_model(
         header = "Source\tPrediction\tAccuracy\tGLEU"
         lines = [results, "\n===\n", header, *["\t".join(map(str, d)) for d in data]]
         results_file = Path(f"{session_key} PREDICTION_RESULTS {i+1}.txt")
-        results_file.write_text("\n".join(lines), encoding="utf8", errors="ignore")
+        results_file.write_text("\n".join(lines), encoding="utf8")
         print(f"Results written to {str(results_file.absolute())}")
 
 
