@@ -28,7 +28,7 @@ HEADERS = {
 }
 
 
-replace_map = {
+replace_map = [
     ("\r", ""),
     ("\n", " "),
     ("(", ""),
@@ -48,8 +48,61 @@ replace_map = {
     ("Mrs.", " "),
     ("Mr.", " "),
     ("  ", " "),
-}
+]
 punct = {".", "?", "!"}
+
+
+def clean_file(path: Path) -> Path:
+    new_path = path.parent / f"{path.stem}_cleaned{path.suffix}"
+    content = path.read_text(encoding="utf8").strip().replace("\r", "")
+    
+    #if file is a translation file 
+    if content.count("\n") == content.count("\t") -1:
+        for f, r in replace_map[2:]:
+            content = content.replace(f, r)
+        new_path.write_text(content, encoding="utf8")
+    #if file is not a translation file
+    else:
+        lines = sentencize(path)
+        new_path.write_text("\n".join(lines), encoding="utf8")
+    
+    print(f"Cleaned file saved to: {new_path.absolute()}")
+    return new_path
+        
+
+def clean_folder(path: Path) -> Path:
+    """Cleans a folder of text data, returns path to cleaned folder"""
+    if path.is_file():
+        raise Exception("Must be used on a folder path, not file")
+
+    out_folder = Path(str(path.absolute()) + "_clean")
+    out_folder.mkdir(exist_ok=True)
+    for f in path.iterdir():
+        text = "\n".join(sentencize(f))
+        Path(out_folder.joinpath(f.name)).write_text(text)
+    return out_folder
+
+
+def sentencize(path: Path) -> list[str]:
+    text = path.read_text(encoding="utf8")
+    for find, replacement in replace_map:
+        text = text.replace(find, replacement)
+    sentences = list()
+    add_str = ""
+    for c in text:
+        if c in punct:
+            if add_str != "":
+                add_str = add_str.strip() + c
+                if (
+                    (add_str.find(" ") > 0)
+                    and (add_str[0] >= "A")
+                    and (add_str[0] == add_str[0].upper())
+                ):
+                    sentences.append(add_str)
+                add_str = ""
+        else:
+            add_str = add_str + c
+    return sentences
 
 
 class InferenceDetailType(Enum):
@@ -333,7 +386,7 @@ def evaluate_translation_model(
             *["\t".join(map(str, d)) for d in data if not d[3]],
         ]
         results_file = Path(f"{session_key} TRANSLATION_RESULTS {i+1}.txt")
-        results_file.results_file.write_text("\n".join(lines), encoding="utf8")
+        results_file.write_text("\n".join(lines), encoding="utf8")
         print(f"Results written to {str(results_file.absolute())}")
 
 
