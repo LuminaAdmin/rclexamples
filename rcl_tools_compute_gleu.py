@@ -64,7 +64,7 @@ def clean_file(path: Path) -> Path:
     #if file is not a translation file
     else:
         lines = sentencize(path)
-        new_path.write_text("\n".join(lines), encoding="utf8")
+        new_path.write_text("\r\n".join(lines), encoding="utf8")
     
     print(f"Cleaned file saved to: {new_path.absolute()}")
     return new_path
