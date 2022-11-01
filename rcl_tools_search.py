@@ -50,20 +50,20 @@ punct = {".", "?", "!"}
 def clean_file(path: Path) -> Path:
     new_path = path.parent / f"{path.stem}_cleaned{path.suffix}"
     content = path.read_text(encoding="utf8").strip().replace("\r", "")
-    
-    #if file is a translation file 
-    if content.count("\n") == content.count("\t") -1:
+
+    # if file is a translation file
+    if content.count("\n") == content.count("\t") - 1:
         for f, r in replace_map[2:]:
             content = content.replace(f, r)
         new_path.write_text(content, encoding="utf8")
-    #if file is not a translation file
+    # if file is not a translation file
     else:
         lines = sentencize(path)
         new_path.write_text("\r\n".join(lines), encoding="utf8")
-    
+
     print(f"Cleaned file saved to: {new_path.absolute()}")
     return new_path
-        
+
 
 def clean_folder(path: Path) -> Path:
     """Cleans a folder of text data, returns path to cleaned folder"""
@@ -99,7 +99,7 @@ def sentencize(path: Path) -> list[str]:
             add_str = add_str + c
     return sentences
 
-    
+
 class InferenceDetailType(Enum):
     """Enums containing the id's for inference types"""
 
@@ -306,20 +306,20 @@ def inference(
 
 def search_example():
     # UPDATE YOUR DESCRIPTION HERE
-    session_key = create_session("Self Driving Car Sensor Data Search Script")
+    session_key = create_session("Search Script")
     print(f"Created session: {session_key}")
 
     print("uploading files")
     dataset = Path(DATA_SET)
     upload_file(session_key, dataset)
 
-    print("Training Sensor Input Model - Search Inference with Train Goal to 70%")
+    print("Search Inference")
 
     train_model(
         session_key=session_key,
         vector_size=5,
         translation_model=False,
-        sensor_model=True,
+        sensor_model=False,
         train_goal=0.7,
         block_for_ready=True,
     )
