@@ -55,20 +55,20 @@ punct = {".", "?", "!"}
 def clean_file(path: Path) -> Path:
     new_path = path.parent / f"{path.stem}_cleaned{path.suffix}"
     content = path.read_text(encoding="utf8").strip().replace("\r", "")
-    
-    #if file is a translation file 
-    if content.count("\n") == content.count("\t") -1:
+
+    # if file is a translation file
+    if content.count("\n") == content.count("\t") - 1:
         for f, r in replace_map[2:]:
             content = content.replace(f, r)
         new_path.write_text(content, encoding="utf8")
-    #if file is not a translation file
+    # if file is not a translation file
     else:
         lines = sentencize(path)
         new_path.write_text("\r\n".join(lines), encoding="utf8")
-    
+
     print(f"Cleaned file saved to: {new_path.absolute()}")
     return new_path
-        
+
 
 def clean_folder(path: Path) -> Path:
     """Cleans a folder of text data, returns path to cleaned folder"""

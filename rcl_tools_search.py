@@ -328,12 +328,8 @@ def search_example():
     print("Testing inference: search")
 
     # input example 1
-    example1 = "Hello"
+    example1 = "Tom fell in love"
     print("Example1 inference input:" + example1)
-
-    # input example 2
-    example2 = "Good morning, how are you?"
-    print("Example2 inference input:" + example2)
 
     # output example 1
     result1 = inference(
@@ -343,15 +339,6 @@ def search_example():
         InferenceDetailType.search,
     )
     print("Example1 inference result:" + result1)
-
-    # output example 2
-    result2 = inference(
-        session_key,
-        example2,
-        InferencePriorityType.index,
-        InferenceDetailType.search,
-    )
-    print("Example2 inference result:" + result2)
 
 
 if __name__ == "__main__":

@@ -575,7 +575,7 @@ def translation_example():
 
     print("Training done!")
     print("Testing inference: translate")
-    sample = "Ill be back."
+    sample = "It is bad manners to point at people."
     print("Example input:" + sample)
     result = inference(
         session_key,
