@@ -13,4 +13,5 @@ Before running for the first time, please run the following command
 2. Sign in or Signup by clicking the Profile menu
 3. Copy your access token from the support site and paste it into the API_TOKEN variable at the top of the example script
 4. Install nltk library (pip install nltk)
-5. Run the example script.
+5. Install requests library (pip install requests)
+6. Run the example script.

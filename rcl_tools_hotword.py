@@ -13,7 +13,6 @@ API_TOKEN = "PASTE TOKEN HERE"
 
 # You may change this line to point to a custom dataset for training
 DATA_SET = "rcl_dataset_hotword_sensor/_reinforcement_learning.txt"
-
 API_URL = "https://rclapi.lumina247.io"
 
 HEADERS = {
@@ -51,13 +50,15 @@ def parse_api_response(response: requests.Response) -> dict[str, Any]:
 def create_session(description: str) -> int:
     """Creates an RCL session and returns the id"""
     endpoint = f"{API_URL}/trainingsession"
-    r = requests.post(endpoint, json={"description": str(description)}, headers=HEADERS)
+    r = requests.post(
+        endpoint, json={"description": str(description)}, headers=HEADERS)
     return parse_api_response(r).get("trainingsessionkey", -1)
 
 
 def get_session_info(session_key: int) -> dict[str, Any]:
     """Gets info about an rcl session"""
-    r = requests.get(f"{API_URL}/trainingsession/{session_key}", headers=HEADERS)
+    r = requests.get(
+        f"{API_URL}/trainingsession/{session_key}", headers=HEADERS)
     result = parse_api_response(r)
     try:
         return result
@@ -235,7 +236,7 @@ def hotword_example():
 
     train_model(
         session_key=session_key,
-        vector_size=5,
+        vector_size=1,
         translation_model=False,
         sensor_model=True,
         train_goal=0.7,
@@ -249,10 +250,6 @@ def hotword_example():
     example1 = "a b d eeeee fffffff ggggg hhhhhhhhhh"
     print("Example1 inference input:" + example1)
 
-    # input example 2
-    example2 = "a b c dd hhhhhhhhhh"
-    print("Example2 inference input:" + example2)
-
     # output example 1
     result1 = inference(
         session_key,
@@ -261,15 +258,6 @@ def hotword_example():
         InferenceDetailType.hot_word,
     )
     print("Example1 inference result:" + result1)
-
-    # output example 2
-    result2 = inference(
-        session_key,
-        example2,
-        InferencePriorityType.index,
-        InferenceDetailType.hot_word,
-    )
-    print("Example2 inference result:" + result2)
 
 
 if __name__ == "__main__":

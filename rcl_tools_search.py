@@ -23,6 +23,83 @@ HEADERS = {
 }
 
 
+replace_map = [
+    ("\r", ""),
+    ("\n", " "),
+    ("(", ""),
+    (")", ""),
+    (":", ""),
+    (";", ""),
+    ('"', ""),
+    ("''", "'"),
+    ("”", ""),
+    ("”", ""),
+    ("“", ""),
+    ('"', ""),
+    ("- ", ""),
+    (" - ", " "),
+    (" – ", " "),
+    ("∗", " "),
+    ("Mrs.", " "),
+    ("Mr.", " "),
+    ("  ", " "),
+]
+punct = {".", "?", "!"}
+
+
+def clean_file(path: Path) -> Path:
+    new_path = path.parent / f"{path.stem}_cleaned{path.suffix}"
+    content = path.read_text(encoding="utf8").strip().replace("\r", "")
+
+    # if file is a translation file
+    if content.count("\n") == content.count("\t") - 1:
+        for f, r in replace_map[2:]:
+            content = content.replace(f, r)
+        new_path.write_text(content, encoding="utf8")
+    # if file is not a translation file
+    else:
+        lines = sentencize(path)
+        new_path.write_text("\r\n".join(lines), encoding="utf8")
+
+    print(f"Cleaned file saved to: {new_path.absolute()}")
+    return new_path
+
+
+def clean_folder(path: Path) -> Path:
+    """Cleans a folder of text data, returns path to cleaned folder"""
+    if path.is_file():
+        raise Exception("Must be used on a folder path, not file")
+
+    out_folder = Path(str(path.absolute()) + "_clean")
+    out_folder.mkdir(exist_ok=True)
+    for f in path.iterdir():
+        text = "\n".join(sentencize(f))
+        Path(out_folder.joinpath(f.name)).write_text(text)
+    return out_folder
+
+
+def sentencize(path: Path) -> list[str]:
+    text = path.read_text(encoding="utf8")
+    for find, replacement in replace_map:
+        text = text.replace(find, replacement)
+    sentences = list()
+    add_str = ""
+    for c in text:
+        if c in punct:
+            if add_str != "":
+                add_str = add_str.strip() + c
+                if (
+                    (add_str.find(" ") > 0)
+                    and (add_str[0] >= "A")
+                    and (add_str[0] == add_str[0].upper())
+                ):
+                    sentences.append(add_str)
+                add_str = ""
+        else:
+            add_str = add_str + c
+    return sentences
+
+
 class InferenceDetailType(Enum):
     """Enums containing the id's for inference types"""
 
@@ -114,6 +191,9 @@ def upload_file(session_key: int, file: Path) -> bool:
             json={},
         )
         return r.status_code == 200
+
+    print(f"cleaning file {file.name} before upload.")
+    file = clean_file(file)
 
     file_id = _multipart_upload_start(session_key, file.name)
     ok = _multipart_upload_do(
@@ -226,20 +306,20 @@ def inference(
 
 def search_example():
     # UPDATE YOUR DESCRIPTION HERE
-    session_key = create_session("Self Driving Car Sensor Data Search Script")
+    session_key = create_session("Search Script")
     print(f"Created session: {session_key}")
 
     print("uploading files")
     dataset = Path(DATA_SET)
     upload_file(session_key, dataset)
 
-    print("Training Sensor Input Model - Search Inference with Train Goal to 70%")
+    print("Search Inference")
 
     train_model(
         session_key=session_key,
         vector_size=5,
         translation_model=False,
-        sensor_model=True,
+        sensor_model=False,
         train_goal=0.7,
         block_for_ready=True,
     )
@@ -248,12 +328,8 @@ def search_example():
     print("Testing inference: search")
 
     # input example 1
-    example1 = "Hello"
+    example1 = "Tom fell in love"
     print("Example1 inference input:" + example1)
-
-    # input example 2
-    example2 = "Good morning, how are you?"
-    print("Example2 inference input:" + example2)
 
     # output example 1
     result1 = inference(
@@ -263,15 +339,6 @@ def search_example():
         InferenceDetailType.search,
     )
     print("Example1 inference result:" + result1)
-
-    # output example 2
-    result2 = inference(
-        session_key,
-        example2,
-        InferencePriorityType.index,
-        InferenceDetailType.search,
-    )
-    print("Example2 inference result:" + result2)
 
 
 if __name__ == "__main__":

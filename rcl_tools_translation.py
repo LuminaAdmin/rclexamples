@@ -25,7 +25,7 @@ HEADERS = {
 }
 
 
-replace_map = {
+replace_map = [
     ("\r", ""),
     ("\n", " "),
     ("(", ""),
@@ -45,8 +45,39 @@ replace_map = {
     ("Mrs.", " "),
     ("Mr.", " "),
     ("  ", " "),
-}
+]
 punct = {".", "?", "!"}
+
+
+def clean_file(path: Path) -> Path:
+    new_path = path.parent / f"{path.stem}_cleaned{path.suffix}"
+    content = path.read_text(encoding="utf8").strip().replace("\r", "")
+
+    # if file is a translation file
+    if content.count("\n") == content.count("\t") - 1:
+        for f, r in replace_map[2:]:
+            content = content.replace(f, r)
+        new_path.write_text(content, encoding="utf8")
+    # if file is not a translation file
+    else:
+        lines = sentencize(path)
+        new_path.write_text("\r\n".join(lines), encoding="utf8")
+
+    print(f"Cleaned file saved to: {new_path.absolute()}")
+    return new_path
+
+
+def clean_folder(path: Path) -> Path:
+    """Cleans a folder of text data, returns path to cleaned folder"""
+    if path.is_file():
+        raise Exception("Must be used on a folder path, not file")
+
+    out_folder = Path(str(path.absolute()) + "_clean")
+    out_folder.mkdir(exist_ok=True)
+    for f in path.iterdir():
+        text = "\n".join(sentencize(f))
+        Path(out_folder.joinpath(f.name)).write_text(text)
+    return out_folder
 
 
 def sentencize(path: Path) -> list[str]:
@@ -65,7 +96,6 @@ def sentencize(path: Path) -> list[str]:
                     and (add_str[0] == add_str[0].upper())
                 ):
                     sentences.append(add_str)
-                    print()
                 add_str = ""
         else:
             add_str = add_str + c
@@ -346,6 +376,9 @@ def upload_file(session_key: int, file: Path) -> bool:
         )
         return r.status_code == 200
 
+    print(f"cleaning file {file.name} before upload.")
+    file = clean_file(file)
+
     file_id = _multipart_upload_start(session_key, file.name)
     ok = _multipart_upload_do(
         session_key,
@@ -384,7 +417,7 @@ def training_ready_check(
 def train_model(
     session_key: int,
     vector_size: int,
-    translation_model: bool = False,
+    translation_model: bool = True,
     sensor_model: bool = False,
     train_goal: float = 0.7,
     block_for_ready: bool = True,
@@ -526,19 +559,6 @@ def evaluate_translation_model(
         print(f"Results written to {str(results_file.absolute())}")
 
 
-def clean_folder(path: Path) -> Path:
-    """Cleans a folder of text data, returns path to cleaned folder"""
-    if path.is_file():
-        raise Exception("Must be used on a folder path, not file")
-
-    out_folder = Path(str(path.absolute()) + "_clean")
-    out_folder.mkdir(exist_ok=True)
-    for f in path.iterdir():
-        text = "\n".join(sentencize(f))
-        Path(out_folder.joinpath(f.name)).write_text(text)
-    return out_folder
-
-
 def translation_example():
     """End to end example for translation and gleu scoring"""
 
@@ -555,7 +575,7 @@ def translation_example():
 
     print("Training done!")
     print("Testing inference: translate")
-    sample = "Ill be back."
+    sample = "It is bad manners to point at people."
     print("Example input:" + sample)
     result = inference(
         session_key,
