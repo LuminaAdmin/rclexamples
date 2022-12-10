@@ -1,5 +1,14 @@
-# RCL EXAMPLES
-Before running for the first time, please run the following command
+# RCL TRANSLATION EXAMPLES
+These example scripts are intended to run in order
+1_rcl_training_translation.py - Train a new model.
+2_rcl_inference_translation.py - Start your inference host and test an inference example.
+3_rcl_training_translation_gleu.py - Test Gleu and Accuracy scores for a trained translation model.
+4_rcl_start_inference_host.py - Start an inference host.
+5_rcl_stop_inference_host.py - Stop an inference host.
+6_rcl_terminate_inference_host.py - Permanently terminate an inference host.
+rcl_example_format_tatoeba.py - Example script on how to prepare a Tatoeba sentence pair file for training
+
+Each script has special instructions in the head of the script, please follow these instructions closely and input the required variable values
 # Environment Setup Instructions
 These scripts were written with Python 3.9.
 ## ANACONDA / SPYDER USERS
@@ -16,22 +25,9 @@ These scripts were written with Python 3.9.
 6. Run the example script.
 
 # EXAMPLE SCRIPTS
-## rcl_tools_hotword.py
-This script demonstrates RCL use for sensor style training data.  We have provided a simple reinforcment_learning.txt dataset for you to try for yourself.  We have seen best results when all lines equal the same amount of sensor inputs and outputs.  
-
-The final value of your input line should be your anticipated result / action to take given the sensor inputs provided during inference.
-
-## rcl_tools_prediction.py
-This script demonstrates RCL use for sentence predction.  We have provided a simple_example.txt dataset for you to try for yourself.  Prediction is valuable for convsersational AI / chatbots and the like.
-
-## rcl_tools_search.py
-This script demonstrates RCL use for text search.  We have provided a simple_example.txt dataset for you to try for yourself.
-
-## rcl_tools_translation.py
-This script demonstrates RCL use for language translation using a simple tab seperated sentence pair dataset.  We have provided a two simple files for translation and an example test set file under the rcl_dataset_translate_test subdirectory.
-
-## rcl_tools_format_tatoeba.py
-This script transforms a Tatoeba dataset file into a simple tsv for use with the rcl_tools_translation.py script.  We have provided an English-Yoruba.tsv to test this script with.
-
-# Cleansing Routines
-All example scripts will preprocess / cleanse the data in their respective dataset folder, a cleansed copy of the file will be saved locally and postfixed with _cleaned.  The cleansing routine are examples for you to learn from.  Once you've progressed beyond these few examples, you will want to introduce your own cleansing routines that will fit your needs best.
+1_rcl_tools_training_translation.py - This script trains your translation model.
+2_rcl_tools_inference_translation - This script starts your inference host and runs an example inference on your trained model.
+3_rcl_tools_training_translation_gleu - This script performs gleu scores on your trained model.
+4_start_inference_host.py - This script starts your inference host.
+5_stop_inference_host.py - This script stops your inference host.  This is helpful for when you may not need your model hosted for a period of time.
+6_terminate_inference_host.py - This script PERMANENTLY terminates your inference host.  Executing this script is an unreversable action and your trained model will no longer be available for use.

@@ -1,29 +1,29 @@
 from typing import Any
 import requests
 from pathlib import Path
-import json
-import time
-from enum import Enum
-from requests import Response
+import random
 import re
 import os
+import time
 
-#THIS SCRIPT MUST BE PROVIDED A SIMPLE TAB SEPERATED SENTENCE PAIR DATASET TO FUNCTION PROPERLY
-#EACH SENTENCE MUST BE TERMINATED WITH PUNCUTATION
-#EACH LINE MUST BE TERMINATED WITH A CARRIAGE RETURN
+# THIS SCRIPT TRAINS A NEW MODEL FOR TRANSLATION
+# PLEASE SET THE FOLLOWING VARIABLES
+# 1. API_TOKEN (retrieve from the support portal @ https://support.lumina247.com)
+# 2. SET SESSION_KEY this is the session_key for your trained model
+# 3. SET VECTOR_SIZE this is the vecrot size you used for training
+# 4. SET TEST_PATH this is a path to your test data
 
-# Please set API_TOKEN to what is displayed from https://support.lumina247.com, please make sure the token is in the format "bearer <token>"
 # "PASTE TOKEN HERE"
-API_TOKEN = "PASTE TOKEN HERE"
+API_TOKEN = "TOKEN_VALUE"
 
 # Default chunk size for uploads to 50MB
 FILE_UPLOAD_CHUNK_SIZE = 50000000
 
-# The vector size to use for training, best results tend to be between 3-5, you may need to adjust for best best results for your chosen language
-VECTOR_SIZE = 4
+# The vector size to use for training, best results tend to be between 3-5, you may need to adjust for best results
+VECTOR_SIZE = 5
 
 # You may change this line to point to a custom dataset for training
-DATA_FOLDER = "rcl_dataset_search"
+DATA_FOLDER = "rcl_dataset_translate"
 
 API_URL = "https://rclapi.lumina247.io"
 
@@ -33,21 +33,7 @@ HEADERS = {
     "Authorization": API_TOKEN,
 }
 
-punct = {".", "?", "!"}   
-class InferenceDetailType(Enum):
-    """Enums containing the id's for inference types"""
-
-    search = "Search"
-    predict_line = "PredictLine"
-    predict_next = "PredictNext"
-    translate_line = "TranslateLine"
-    hot_word = "HotWord"
-class InferencePriorityType(Enum):
-    """Enums containing the id's for training optimizers"""
-
-    index = "Index"
-    accuracy = "Accuracy"
-    specific = "Specific"
+punct = {".", "?", "!"}
 
 def clean_input(input):
     rem = re.compile("[" 
@@ -138,19 +124,35 @@ def clean_input(input):
     return re.sub(rem, '', input)
 
 def clean_dataset(path: str) -> str:
-
+    """Cleans a Tab seperated dataset for training purposes"""
     def clean_line(line: str) -> str:
-        lineBytes = line.encode('utf-8')
-        cleansedLine =  clean_input(lineBytes.decode('utf-8')).strip()
-        text = f"{cleansedLine}"        
-        return text
+        parts = line.split("\t")
+        if len(parts) > 1:
+            p1 = parts[0].strip()
+            if p1[-1] not in punct:
+                p1 = f"{p1}."
+        
+            p2 = parts[1].strip()
+            if p2[-1] not in punct:
+                p2 = f"{p2}."
+        
+            part1bytes = p1.encode('utf-8')
+            part2bytes = p2.encode('utf-8')
+
+            part1 = clean_input(part1bytes.decode('utf-8')).strip()
+            part2 = clean_input(part2bytes.decode('utf-8')).strip()
+
+            text = f"{part1}\t{part2}"
+
+            return text
+        return ""
 
     file = Path(path)
     new_file = file.parent / f"{file.stem}_cleaned{file.suffix}"
     lines = file.read_text(encoding="utf8").strip().split("\n")        
     text = "\n".join([clean_line(l) for l in lines])
     new_file.write_text(text, encoding="utf8")
-    return new_file
+    return new_file    
 
 def parse_api_response(response: requests.Response) -> dict[str, Any]:
     """extracts json from response and raises errors when needed"""
@@ -236,6 +238,20 @@ def read_in_chunks(file_object, CHUNK_SIZE):
         if not data:
             break
         yield data
+
+def sample_translation_set(path: Path, sample_size: int = 100, vector_size: int = 5):
+    # translate >= vector length
+    keep = []
+    lines = path.read_text(encoding="utf8").strip().split("\n")
+    for l in lines:
+        en, xx = l.split("\t")
+        en, xx = (en.strip(), xx.strip())
+        if len(en.split(" ")) >= vector_size:
+            keep.append((en, xx))
+
+    random.shuffle(keep)
+    sample = keep[:sample_size]
+    return sample
     
 def upload_training_files(session_key: int, file: Path) -> bool:
     """Uploads a file by path"""    
@@ -279,33 +295,44 @@ def upload_training_files(session_key: int, file: Path) -> bool:
 
     return True
 
-def inference_host_ready_check(
-    session_key: int,
-    priority: InferencePriorityType = InferencePriorityType.index,
-    detail: InferenceDetailType = InferenceDetailType.search,
-) -> Response:
-    """Makes an inference with the model"""
-
-    print("Checking if model is ready for inference.")
-
-    endpoint = (
-        f"{API_URL}"
-        f"/trainingsession/{session_key}"
-        f"/inference/{priority.value}"
-        f"/{detail.value}"
-    )
-    test_data = "health check"
-    r = requests.post(endpoint, data=json.dumps(test_data), headers=HEADERS)
+def check_training_failed(session_key: int):
+    r = requests.get(f"{API_URL}/trainingsession/{session_key}",
+        headers=HEADERS)
     
-    if "unrecognized model" in str(r.content):
-        return inference_host_ready_check(session_key, priority, detail)
+    stats = r.json()['trainingSession']['statuses']
+    
+    training_failed = False
+    
+    for stat in stats:
+        if stat['statusType'] == "TrainingFailed":
+            training_failed = True
 
-    return r
+    if(training_failed):
+        print('Training did not succeed')
+
+    return training_failed
+
+def check_training_succeeded(session_key: int):
+    r = requests.get(f"{API_URL}/trainingsession/{session_key}",
+        headers=HEADERS)
+    
+    stats = r.json()['trainingSession']['statuses']
+    
+    training_succeeded = False
+    
+    for stat in stats:
+        if stat['statusType'] == "TrainingCompleted":            
+            training_succeeded = True
+
+    if(training_succeeded):
+        print('Training succeeded')
+
+    return training_succeeded   
 
 def train_model(
     session_key: int,
     vector_size: int,
-    translation_model: bool = False,
+    translation_model: bool = True,
     sensor_model: bool = False,
     train_goal: float = 0.7
 ) -> bool:
@@ -324,51 +351,21 @@ def train_model(
     if r.status_code != 200:
         raise Exception("Training Error!")
     
-    current_status = ""
-    inference_ready_check = 0
+    training_succeeded = False
+    training_failed = False
 
-    while(current_status != "trainingcompleted" and current_status != "trainingfailed"):
-        info = get_session_info(session_key)
-        current_status = info["trainingsession"]["statuses"][-1]["statusTypeName"].lower()
-        print(f"Current Status: {current_status}")
+    while(training_failed == False and training_succeeded == False):
+        training_failed = check_training_failed(session_key)
+        training_succeeded = check_training_succeeded(session_key)
         time.sleep(60)
-    
-    print (f"Health check complete, training status is {current_status}")
 
-    while(inference_ready_check != 200):
-        inference_ready_check = inference_host_ready_check(session_key, InferencePriorityType.index, InferenceDetailType.search).status_code   
-    
-    if current_status == "trainingcompleted":
-        return True
-    else: 
-        return False
-
-def inference(
-    session_key: int,
-    input_text: str,
-    priority: InferencePriorityType = InferencePriorityType.index,
-    detail: InferenceDetailType = InferenceDetailType.search,
-) -> str:
-    """Makes an inference with the model"""
-    endpoint = (
-        f"{API_URL}"
-        f"/trainingsession/{session_key}"
-        f"/inference/{priority.value}"
-        f"/{detail.value}"
-    )
-    r = requests.post(endpoint, data=json.dumps(input_text), headers=HEADERS)
-    if r.status_code == 200:
-        return r.json()
-    else:
-        raise Exception(f"Error calling inference: {r.json()}")
-
-def search_example():
-    """End to end example for search model"""
+def translation_training_example():
+    """End to end example for translation and gleu scoring"""
 
     # UPDATE YOUR DESCRIPTION HERE
-    session_key = create_session("Search Training")
+    session_key = create_session("my test translation session5")
     
-    print(f"Created session: {session_key}")
+    print(f"Created session: {session_key}")   
 
     training_files = os.listdir(DATA_FOLDER)
 
@@ -381,28 +378,15 @@ def search_example():
 
         upload_training_files(session_key, clean_file)
 
-    print("Upload complete, starting training")
+    print("Upload Completed, Beginning Training")
 
-    training_successful = train_model(session_key, VECTOR_SIZE)
+    training_successful = train_model(session_key, VECTOR_SIZE, translation_model=True)
 
     if training_successful == False:
         print("Training did not complete successfully")
         return
 
     print("Training completed successfully, testing inference")
-   
-    sample = "Tom fell in love"
-
-    print(f"Example input: {sample}")
-
-    result = inference(
-        session_key,
-        sample,
-        InferencePriorityType.index,
-        InferenceDetailType.search,
-    )
-
-    print("Example inference result:" + result)
 
 if __name__ == "__main__":
-    search_example()
+    translation_training_example()
