@@ -17,7 +17,7 @@ from nltk.util import everygrams
 
 # Please set API_TOKEN to what is displayed from https://support.lumina247.com, please make sure the token is in the format "bearer <token>"
 # "PASTE TOKEN HERE"
-API_TOKEN = "bearer API TOKEN"
+API_TOKEN = "bearer TOKEN_VALUE"
 
 # SET YOUR TRAINING SESSION KEY HERE
 SESSION_KEY = "trainingSessionKey"

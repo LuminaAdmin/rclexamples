@@ -13,7 +13,7 @@ import time
 # 2. SET SESSION_KEY this is the session_key for your trained model
 # 3. SET VECTOR_SIZE this is the vecrot size you used for training
 
-API_TOKEN = "bearer API TOKEN"
+API_TOKEN = "bearer TOKEN_VALUE"
 
 # SET YOUR TRAINING SESSION KEY HERE
 SESSION_KEY = "trainingSessionKey"

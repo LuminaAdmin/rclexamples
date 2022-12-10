@@ -10,7 +10,7 @@ import json
 # 1. API_TOKEN (retrieve from the support portal @ https://support.lumina247.com)
 # 2. SET SESSION_KEY this is the session_key for your trained model
 
-API_TOKEN = "API TOKEN"
+API_TOKEN = "bearer TOKEN_VALUE"
 
 # SET YOUR TRAINING SESSION KEY HERE
 SESSION_KEY = "trainingSessionKey"

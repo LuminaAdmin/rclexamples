@@ -14,7 +14,7 @@ import time
 # 4. SET TEST_PATH this is a path to your test data
 
 # "PASTE TOKEN HERE"
-API_TOKEN = "TOKEN_VALUE"
+API_TOKEN = "bearer TOKEN_VALUE"
 
 # Default chunk size for uploads to 50MB
 FILE_UPLOAD_CHUNK_SIZE = 50000000
