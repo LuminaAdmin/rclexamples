@@ -1,5 +1,6 @@
 # RCL TRANSLATION EXAMPLES
 These example scripts are intended to run in order
+
 1_rcl_training_translation.py - Train a new model.
 2_rcl_inference_translation.py - Start your inference host and test an inference example.
 3_rcl_training_translation_gleu.py - Test Gleu and Accuracy scores for a trained translation model.
